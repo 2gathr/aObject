@@ -56,4 +56,22 @@ aObject.update = function(currentObject, newObject) {
 	});
 };
 
+aObject.compareKeys = function(object, expectedObject) {
+	var equal = true;
+	Object.keys(expectedObject).forEach(function(key) {
+		if(typeof expectedObject[key] == 'object') {
+			if(typeof object[key] == 'object') {
+				equal = false;
+			} else {
+				if(!aObject.compareKeys(object[key], expectedObject[key])) {
+					equal = false;
+				}
+			}
+		} else if(typeof object[key] == 'undefined') {
+			equal = false;
+		}
+	});
+	return equal;
+};
+
 module.exports = aObject;
