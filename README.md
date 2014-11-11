@@ -35,6 +35,7 @@ aObject.each(
 		console.log('done');
 	}
 );
+```
 
 ### aObject.eachSync()
 ```node
