@@ -3,7 +3,7 @@ An Node.js module for iterating through objects asynchronous and synchronous, up
 
 **License** [GNU GPL v3.0](https://github.com/2gathr/aObject/blob/master/LICENSE)
 
-## Functions`
+## Functions
 ### aObject.each()
 ```node
 aObject.each(object object, function iterator, function callback);
@@ -23,7 +23,7 @@ aObject.eachSync(object object, function iterator);
 ```
 Applies the function `iterator` to each item in `object`, serial. `iterator` is called with a key and a value from the object.
 
-### Arguments
+#### Arguments
 - object `object` - An object to iterate over.
 - function `iterator(string key, mixed value)` - A function to apply to each item in `object`.
 
