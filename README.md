@@ -3,6 +3,14 @@ An Node.js module for iterating through objects asynchronously and synchronously
 
 **License** [GNU GPL v3.0](https://github.com/2gathr/aObject/blob/master/LICENSE)
 
+## Usage
+```
+npm install a-object
+```
+```node
+var aObject = require('a-object');
+```
+
 ## Functions
 ### aObject.each()
 ```node
