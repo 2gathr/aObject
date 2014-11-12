@@ -34,7 +34,6 @@ aObject.each = function(object, iterator, next) {
 		if(completed >= length) {
 			next();
 		}
-		var called = true;
 	}
 };
 
