@@ -57,19 +57,25 @@ aObject.update = function(currentObject, newObject) {
 
 aObject.compareKeys = function(object, expectedObject) {
 	var equal = true;
-	Object.keys(expectedObject).forEach(function(key) {
-		if(typeof expectedObject[key] == 'object') {
-			if(typeof object[key] == 'object') {
+	if(Array.isArray(expectedObject)) {
+		expectedObject.forEach(function(key) {
+			if(typeof object[key] == 'undefined') {
 				equal = false;
-			} else {
-				if(!aObject.compareKeys(object[key], expectedObject[key])) {
+			}
+		});
+	} else {
+		Object.keys(expectedObject).forEach(function(key) {
+			if(typeof expectedObject[key] == 'object') {
+				if(typeof object[key] == 'object') {
+					if(!aObject.compareKeys(object[key], expectedObject[key])) {
+						equal = false;
+					}
+				} else {
 					equal = false;
 				}
 			}
-		} else if(typeof object[key] == 'undefined') {
-			equal = false;
-		}
-	});
+		});
+	}
 	return equal;
 };
 
