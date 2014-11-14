@@ -94,13 +94,13 @@ aObject.update(
 
 ### aObject.compareKeys()
 ```node
-aObject.compareKeys(object object, object expectedObject);
+aObject.compareKeys(object object, mixed expectedObject);
 ```
 'Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
 
 #### Arguments
 - object `object` - The first object for comparison.
-- object `expectedObject` - The second object for comparison.
+- mixed `expectedObject` - The second object for comparison. It can be an array as well, where only the keys are given; if `èxpectedObject` is an array, resursive comparison isn't possible.
 
 #### Example
 ```node
@@ -125,11 +125,9 @@ aObject.compareKeys(
 		key1: 'foo',
 		key2: 'bla'
 	},
-	{
-		key1: 'foo2',
-		key2: {
-			key3: 'bla2'
-		}
-	}
+	[
+		'key1',
+		'key3'
+	]
 );
 ```
