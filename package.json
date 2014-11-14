@@ -1,6 +1,6 @@
 {
   "name": "a-object",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An Node.js module for iterating through objects asynchronously and synchronously, updating them recursivley and comparing their keys.",
   "main": "aObject.js",
   "scripts": {
