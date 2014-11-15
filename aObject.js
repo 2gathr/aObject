@@ -1,6 +1,24 @@
-var aObject = {};
+function AObject(object) {
+	this.object = object;
+};
 
-aObject.each = function(object, iterator, next) {
+AObject.prototype.each = function(iterator, next) {
+	AObject.each(this.object, iterator, next);
+};
+
+AObject.prototype.eachSync = function(iterator) {
+	AObject.eachSync(this.object, iterator);
+};
+
+AObject.prototype.update = function(newObject) {
+	AObject.update(this.object, newObject);
+};
+
+AObject.prototype.compareKeys = function(object) {
+	AObject.compareKeys(this.object, object);
+};
+
+AObject.each = function(object, iterator, next) {
 	var length = Object.keys(object).length,
 		completed = 0,
 		root,
@@ -37,25 +55,25 @@ aObject.each = function(object, iterator, next) {
 	}
 };
 
-aObject.eachSync = function(object, iterator) {
+AObject.eachSync = function(object, iterator) {
 	Object.keys(object).forEach(function(key) {
 		iterator(key, object[key]);
 	});
 };
 
-aObject.update = function(currentObject, newObject) {
+AObject.update = function(currentObject, newObject) {
 	Object.keys(newObject).forEach(function(key) {
 		if(typeof newObject[key] == 'object') {
 			if(typeof currentObject[key] == 'undefined') {
 				currentObject[key] = {};
 			}
-			return aObject.update(currentObject[key], newObject[key]);
+			return AObject.update(currentObject[key], newObject[key]);
 		}
 		currentObject[key] = newObject[key];
 	});
 };
 
-aObject.compareKeys = function(object, expectedObject) {
+AObject.compareKeys = function(expectedObject, object) {
 	var equal = true;
 	if(Array.isArray(expectedObject)) {
 		expectedObject.forEach(function(key) {
@@ -67,7 +85,7 @@ aObject.compareKeys = function(object, expectedObject) {
 		Object.keys(expectedObject).forEach(function(key) {
 			if(typeof expectedObject[key] == 'object') {
 				if(typeof object[key] == 'object') {
-					if(!aObject.compareKeys(object[key], expectedObject[key])) {
+					if(!AObject.compareKeys(object[key], expectedObject[key])) {
 						equal = false;
 					}
 				} else {
@@ -79,4 +97,4 @@ aObject.compareKeys = function(object, expectedObject) {
 	return equal;
 };
 
-module.exports = aObject;
+module.exports = AObject;
