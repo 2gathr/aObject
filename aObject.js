@@ -1,6 +1,6 @@
 function AObject(object) {
 	this.object = object;
-};
+}
 
 AObject.prototype.each = function(iterator, next) {
 	AObject.each(this.object, iterator, next);
@@ -73,7 +73,7 @@ AObject.update = function(currentObject, newObject) {
 	});
 };
 
-AObject.compareKeys = function(expectedObject, object) {
+AObject.compareKeys = function(expectedObject, object, strict) {
 	var equal = true;
 	if(Array.isArray(expectedObject)) {
 		expectedObject.forEach(function(key) {
@@ -85,14 +85,39 @@ AObject.compareKeys = function(expectedObject, object) {
 		Object.keys(expectedObject).forEach(function(key) {
 			if(typeof expectedObject[key] == 'object') {
 				if(typeof object[key] == 'object') {
-					if(!AObject.compareKeys(object[key], expectedObject[key])) {
+					if(!AObject.compareKeys(expectedObject[key], object[key])) {
 						equal = false;
 					}
 				} else {
 					equal = false;
 				}
+			} else if(typeof object[key] == 'undefined') {
+				equal = false;
 			}
 		});
+	}
+	if(strict) {
+		if(Array.isArray(expectedObject)) {
+			Object.keys(object).forEach(function(key) {
+				if(typeof expectedObject[key] == 'undefined') {
+					equal = false;
+				}
+			});
+		} else {
+			Object.keys(object).forEach(function(key) {
+				if(typeof expectedObject[key] == 'object') {
+					if(typeof object[key] == 'object') {
+						if(!AObject.compareKeys(expectedObject[key], object[key])) {
+							equal = false;
+						}
+					} else {
+						equal = false;
+					}
+				} else if(typeof( expectedObject[key] == 'undefined')) {
+					equal = false;
+				}
+			});
+		}
 	}
 	return equal;
 };
