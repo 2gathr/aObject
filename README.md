@@ -65,6 +65,7 @@ Calls `AObject.compareKeys()` with the object given in `AObject()` as `expectedO
 
 #### Arguments
 - object `object` - The object to be compared with `expectedObject`.
+- bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: `false`
 
 ### AObject.each()
 ```node
@@ -155,8 +156,11 @@ AObject.compareKeys(mixed expectedObject, object object);
 #### Arguments
 - mixed `expectedObject` - The object for comparison. It can be an array as well, where only the keys are given, if `èxpectedObject` is an array, the comparison isn't recursive.
 - object `object` - The object to be compared with `expectedObject`.
+- bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: false
 
-Note, that all keys of `expectedObject` have to exist in `object` as well to return true, but in `object` there can be keys not given in `epxpectedObject`.
+Note, that by default all keys of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be keys not given in `expectedObject`.
+
+If `strict` is set to true, all keys of `object` have to exist in `expectedObject` as well, so the comparison is bidirectional.
 
 #### Example
 ```node
