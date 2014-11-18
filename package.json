@@ -25,5 +25,6 @@
   "bugs": {
     "url": "https://github.com/2gathr/aObject/issues"
   },
-  "homepage": "https://github.com/2gathr/aObject"
+  "homepage": "https://github.com/2gathr/aObject",
+  "dependencies": {}
 }
