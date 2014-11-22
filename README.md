@@ -151,10 +151,10 @@ AObject.update(
 ```node
 AObject.compareKeys(mixed expectedObject, object object);
 ```
-'Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
+Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
 
 #### Arguments
-- mixed `expectedObject` - The object for comparison. It can be an array as well, where only the keys are given, if `èxpectedObject` is an array, the comparison isn't recursive.
+- mixed `expectedObject` - The object for comparison. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
 - object `object` - The object to be compared with `expectedObject`.
 - bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: false
 
