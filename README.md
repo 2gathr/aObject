@@ -1,5 +1,5 @@
 # AObject
-An Node.js module for iterating through objects asynchronously and synchronously, updating them recursivley and comparing their keys.
+A Node.js module for iterating through objects asynchronously and synchronously, updating them recursivley and comparing their keys.
 
 **License** [GNU GPL v3.0](https://github.com/2gathr/AObject/blob/master/LICENSE)
 

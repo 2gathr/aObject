@@ -1,7 +1,7 @@
 {
     "name": "a-object",
-    "version": "0.2.1",
-    "description": "An Node.js module for iterating through objects asynchronously and synchronously, updating them recursivley and comparing their keys.",
+    "version": "0.2.2",
+    "description": "A Node.js module for iterating through objects asynchronously and synchronously, updating them recursivley and comparing their keys.",
     "main": "aObject.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
