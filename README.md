@@ -65,7 +65,7 @@ Calls `AObject.compareKeys()` with the object given in `AObject()` as `expectedO
 
 #### Arguments
 - object `object` - The object to be compared with `expectedObject`.
-- bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: `false`
+- bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well. Default: `false`
 
 ### AObject.each()
 ```node
