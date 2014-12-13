@@ -97,27 +97,7 @@ AObject.compareKeys = function(expectedObject, object, strict) {
 		});
 	}
 	if(strict) {
-		if(Array.isArray(expectedObject)) {
-			Object.keys(object).forEach(function(key) {
-				if(typeof expectedObject[key] == 'undefined') {
-					equal = false;
-				}
-			});
-		} else {
-			Object.keys(object).forEach(function(key) {
-				if(typeof expectedObject[key] == 'object') {
-					if(typeof object[key] == 'object') {
-						if(!AObject.compareKeys(expectedObject[key], object[key])) {
-							equal = false;
-						}
-					} else {
-						equal = false;
-					}
-				} else if(typeof( expectedObject[key] == 'undefined')) {
-					equal = false;
-				}
-			});
-		}
+		AObject.compareKeys(object[key], expectedObject[key], true);
 	}
 	return equal;
 };
