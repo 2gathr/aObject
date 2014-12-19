@@ -1,14 +1,14 @@
 {
-    "name": "a-object",
+    "name": "object-analyzr",
     "version": "1.0.0",
-    "description": "A Node.js module for iterating through objects asynchronously and synchronously, updating them recursivley and comparing their keys.",
-    "main": "aObject.js",
+    "description": "A Node.js module for iterating through objects asynchronously and synchronously, updating and comparing them recursivley and getting parts of them.",
+    "main": "objectAnalyzr.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/2gathr/aObject"
+        "url": "https://github.com/2gathr/objectAnalyzr"
     },
     "keywords": [
         "asynchronous",
@@ -23,8 +23,8 @@
     "author": "Felix Schütz",
     "license": "GNU GPL v3.0",
     "bugs": {
-        "url": "https://github.com/2gathr/aObject/issues"
+        "url": "https://github.com/2gathr/objectAnalyzr/issues"
     },
-    "homepage": "https://github.com/2gathr/aObject",
+    "homepage": "https://github.com/2gathr/objectAnalyzr",
     "dependencies": {}
 }
