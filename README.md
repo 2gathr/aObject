@@ -1,84 +1,84 @@
-# AObject
+# ObjectAnalyzr
 A Node.js module for iterating through objects asynchronously and synchronously, updating them recursivley and comparing their keys.
 
-**License** [GNU GPL v3.0](https://github.com/2gathr/AObject/blob/master/LICENSE)
+**License** [GNU GPL v3.0](https://github.com/2gathr/ObjectAnalyzr/blob/master/LICENSE)
 
 ## Usage
 ```sh
 npm install a-object
 ```
 ```node
-var AObject = require('a-object');
+var ObjectAnalyzr = require('a-object');
 ```
 
 ## Functions
-### AObject()
+### ObjectAnalyzr()
 ```node
-var aObject = new AObject(object object);
+var objectAnalyzr = new ObjectAnalyzr(object object);
 ```
-Creates a new instance of `AObject` with the given `object`.
+Creates a new instance of `ObjectAnalyzr` with the given `object`.
 
 #### Arguments
 - object `object` - The object to use for instance functions.
 
 #### Example
 ```node
-var aObject = new AObject({
+var objectAnalyzr = new ObjectAnalyzr({
 	key1: 'foo',
 	key2: 'bla'
 });
 ```
 
-### AObject#each()
+### ObjectAnalyzr#each()
 ```node
-aObject.each(function iterator, function callback);
+objectAnalyzr.each(function iterator, function callback);
 ```
-Calls `AObject.each()` with the object given in `AObject()` as `object`.
+Calls `ObjectAnalyzr.each()` with the object given in `ObjectAnalyzr()` as `object`.
 
 #### Arguments
 - function `iterator(string key, mixed value, function callback)` - A function to apply to each item in `object`. `iterator` is passed a `callback(error)` which must be called once it has completed. If no error has occurred, the callback should be run without arguments or with an explicit null argument.
 - function `callback(error)` - A callback which is called when all iterator functions have finished, or an error occurs.
 
-### AObject#eachSync()
+### ObjectAnalyzr#eachSync()
 ```node
-aObject.eachSync(function iterator);
+objectAnalyzr.eachSync(function iterator);
 ```
-Calls `AObject.eachSync()` with the object given in `AObject()` as `object`.
+Calls `ObjectAnalyzr.eachSync()` with the object given in `ObjectAnalyzr()` as `object`.
 
 #### Arguments
 - function `iterator(string key, mixed value)` - A function to apply to each item in `object`.
 
-### AObject#update()
+### ObjectAnalyzr#update()
 ```node
-aObject.update(object newObject);
+objectAnalyzr.update(object newObject);
 ```
-Calls `AObject.update()` with the object given in `AObject()` as `newObject`.
+Calls `ObjectAnalyzr.update()` with the object given in `ObjectAnalyzr()` as `newObject`.
 
 #### Arguments
 - object `newObject` - The object to be merged into `currentObject`.
 
-### AObject#compareKeys()
+### ObjectAnalyzr#compareKeys()
 ```node
-aObject.compareKeys(mixed expectedObject);
+objectAnalyzr.compareKeys(mixed expectedObject);
 ```
-Calls `AObject.compareKeys()` with the object given in `AObject()` as `object`.
+Calls `ObjectAnalyzr.compareKeys()` with the object given in `ObjectAnalyzr()` as `object`.
 
 #### Arguments
 - mixed `object` - The object for comparision. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
 - bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well. Default: `false`
 
-### AObject#getKeys()
+### ObjectAnalyzr#getKeys()
 ```node
-aObject.getKeys(array keys)
+objectAnalyzr.getKeys(array keys)
 ```
-Calls `AObject.getKeys()` with the object given in `AObject()` as `object`.
+Calls `ObjectAnalyzr.getKeys()` with the object given in `ObjectAnalyzr()` as `object`.
 
 #### Arguments
 - array `keys` - All keys of `object` to be returned.
 
-### AObject.each()
+### ObjectAnalyzr.each()
 ```node
-AObject.each(object object, function iterator, function callback);
+ObjectAnalyzr.each(object object, function iterator, function callback);
 ```
 Applies the function `iterator` to each item in `object`, in parallel. `iterator` is called with a key and a value from the object, and a callback for when it has finished. If the iterator passes an error to its callback, the main callback (for the each function) is immediately called with the error.
 
@@ -92,7 +92,7 @@ Note, that since this function applies iterator to each item in parallel, there 
 #### Example
 ```node
 // will log 'done' to console if no error occurs in the iterator function
-AObject.each(
+ObjectAnalyzr.each(
 	{
 		key1: 'foo',
 		key2: 'bla',
@@ -109,9 +109,9 @@ AObject.each(
 );
 ```
 
-### AObject.eachSync()
+### ObjectAnalyzr.eachSync()
 ```node
-AObject.eachSync(object object, function iterator);
+ObjectAnalyzr.eachSync(object object, function iterator);
 ```
 Applies the function `iterator` to each item in `object`, serial. `iterator` is called with a key and a value from the object.
 
@@ -122,7 +122,7 @@ Applies the function `iterator` to each item in `object`, serial. `iterator` is 
 #### Example
 ```node
 // will log 2 messages to console: 'The value of key1 is foo'; 'The value of key2 is bla'
-AObject.eachSync(
+ObjectAnalyzr.eachSync(
 	{
 		key1: 'foo',
 		key2: 'bla'
@@ -133,9 +133,9 @@ AObject.eachSync(
 );
 ```
 
-### AObject.update()
+### ObjectAnalyzr.update()
 ```node
-AObject.update(object currentObject, object newObject);
+ObjectAnalyzr.update(object currentObject, object newObject);
 ```
 Adds all keys of `newObject` and their values recursively to currentObject or overwrites existing ones.
 
@@ -146,7 +146,7 @@ Adds all keys of `newObject` and their values recursively to currentObject or ov
 #### Example
 ```node
 // currentObject will be {key1: 'foo', key2: 'bla2', key3: 'foo2'}
-AObject.update(
+ObjectAnalyzr.update(
 	{
 		key1: 'foo',
 		key2: 'bla',
@@ -158,9 +158,9 @@ AObject.update(
 );
 ```
 
-### AObject.compareKeys()
+### ObjectAnalyzr.compareKeys()
 ```node
-AObject.compareKeys(mixed expectedObject, object object);
+ObjectAnalyzr.compareKeys(mixed expectedObject, object object);
 ```
 Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
 
@@ -176,7 +176,7 @@ If `strict` is set to true, all keys of `object` have to exist in `expectedObjec
 #### Example
 ```node
 // returns true
-AObject.compareKeys(
+ObjectAnalyzr.compareKeys(
 	{
 		key1: 'foo',
 		key2: {
@@ -191,7 +191,7 @@ AObject.compareKeys(
 	}
 );
 // returns false
-AObject.compareKeys(
+ObjectAnalyzr.compareKeys(
 	[
 		'key1',
 		'key3'
@@ -203,9 +203,9 @@ AObject.compareKeys(
 );
 ```
 
-### AObject.getKeys()
+### ObjectAnalyzr.getKeys()
 ```node
-AObject.getKeys(object object, array keys);
+ObjectAnalyzr.getKeys(object object, array keys);
 ```
 Returns all keys in `keys` of `object`.
 
@@ -216,7 +216,7 @@ Returns all keys in `keys` of `object`.
 #### Example
 ```node
 // returns {first: 'one', third: 'four'}
-AObject.getKeys(
+ObjectAnalyzr.getKeys(
 	{
 		first: 'one',
 		second: 'seven',
