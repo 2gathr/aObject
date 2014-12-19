@@ -18,7 +18,9 @@
         "key",
         "value",
         "compare",
-        "iterate"
+        "iterate",
+        "get",
+        "part"
     ],
     "author": "Felix Schütz",
     "license": "GNU GPL v3.0",
