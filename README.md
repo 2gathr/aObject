@@ -57,24 +57,30 @@ Calls `ObjectAnalyzr.update()` with the object given in `ObjectAnalyzr()` as `ne
 #### Arguments
 - object `newObject` - The object to be merged into `currentObject`.
 
-### ObjectAnalyzr#compareKeys()
+### ObjectAnalyzr#compare()
 ```node
-objectAnalyzr.compareKeys(mixed expectedObject);
+objectAnalyzr.compare(mixed expectedObject);
 ```
-Calls `ObjectAnalyzr.compareKeys()` with the object given in `ObjectAnalyzr()` as `object`.
+Calls `ObjectAnalyzr.compare()` with the object given in `ObjectAnalyzr()` as `object`.
 
 #### Arguments
 - mixed `object` - The object for comparision. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
 - bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well. Default: `false`
 
-### ObjectAnalyzr#getKeys()
+### ObjectAnalyzr#compareKeys() *Deprecated*
+Deprecated alias for `ObjectAnalyzr#compare()`. Will be removed in version 2.x.
+
+### ObjectAnalyzr#get()
 ```node
-objectAnalyzr.getKeys(array keys)
+objectAnalyzr.get(array keys)
 ```
-Calls `ObjectAnalyzr.getKeys()` with the object given in `ObjectAnalyzr()` as `object`.
+Calls `ObjectAnalyzr.get()` with the object given in `ObjectAnalyzr()` as `object`.
 
 #### Arguments
 - array `keys` - All keys of `object` to be returned.
+
+### ObjectAnalyzr#getKeys() *Deprecated*
+Deprecated alias for `ObjectAnalyzr#get()`. Will be removed in version 2.x.
 
 ### ObjectAnalyzr.each()
 ```node
@@ -158,9 +164,9 @@ ObjectAnalyzr.update(
 );
 ```
 
-### ObjectAnalyzr.compareKeys()
+### ObjectAnalyzr.compare()
 ```node
-ObjectAnalyzr.compareKeys(mixed expectedObject, object object);
+ObjectAnalyzr.compare(mixed expectedObject, object object);
 ```
 Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
 
@@ -176,7 +182,7 @@ If `strict` is set to true, all keys of `object` have to exist in `expectedObjec
 #### Example
 ```node
 // returns true
-ObjectAnalyzr.compareKeys(
+ObjectAnalyzr.compare(
 	{
 		key1: 'foo',
 		key2: {
@@ -191,7 +197,7 @@ ObjectAnalyzr.compareKeys(
 	}
 );
 // returns false
-ObjectAnalyzr.compareKeys(
+ObjectAnalyzr.compare(
 	[
 		'key1',
 		'key3'
@@ -203,9 +209,12 @@ ObjectAnalyzr.compareKeys(
 );
 ```
 
-### ObjectAnalyzr.getKeys()
+### ObjectAnalyzr.compareKeys() *Deprecated*
+Deprecated alias for `ObjectAnalyzr.compare()`. Will be removed in version 2.x.
+
+### ObjectAnalyzr.get()
 ```node
-ObjectAnalyzr.getKeys(object object, array keys);
+ObjectAnalyzr.get(object object, array keys);
 ```
 Returns all keys in `keys` of `object`.
 
@@ -216,7 +225,7 @@ Returns all keys in `keys` of `object`.
 #### Example
 ```node
 // returns {first: 'one', third: 'four'}
-ObjectAnalyzr.getKeys(
+ObjectAnalyzr.get(
 	{
 		first: 'one',
 		second: 'seven',
@@ -228,3 +237,6 @@ ObjectAnalyzr.getKeys(
 	]
 );
 ```
+
+### ObjectAnalyzr.getKeys() *Deprecated*
+Deprecated alias for `ObjectAnalyzr.get()`. Will be removed in version 2.x.
