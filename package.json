@@ -1,6 +1,6 @@
 {
     "name": "object-analyzr",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "A Node.js module for iterating through objects asynchronously and synchronously, updating and comparing them recursivley and getting parts of them.",
     "main": "objectAnalyzr.js",
     "scripts": {
