@@ -59,13 +59,22 @@ Calls `AObject.update()` with the object given in `AObject()` as `newObject`.
 
 ### AObject#compareKeys()
 ```node
-aObject.compareKeys(object object);
+aObject.compareKeys(mixed expectedObject);
 ```
-Calls `AObject.compareKeys()` with the object given in `AObject()` as `expectedObject`.
+Calls `AObject.compareKeys()` with the object given in `AObject()` as `object`.
 
 #### Arguments
-- object `object` - The object to be compared with `expectedObject`.
+- mixed `object` - The object for comparision. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
 - bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well. Default: `false`
+
+### AObject#getKeys()
+```node
+aObject.getKeys(array keys)
+```
+Calls `AObject.getKeys()` with the object given in `AObject()` as `object`.
+
+#### Arguments
+- array `keys` - All keys of `object` to be returned.
 
 ### AObject.each()
 ```node
@@ -82,6 +91,7 @@ Note, that since this function applies iterator to each item in parallel, there 
 
 #### Example
 ```node
+// will log 'done' to console if no error occurs in the iterator function
 AObject.each(
 	{
 		key1: 'foo',
@@ -89,12 +99,11 @@ AObject.each(
 	},
 	function(key, value, next) {
 		// Do some asynchronous stuff with key and value
+		if(err) next(err); // Ooops ... error ...
 		next();
 	},
 	function(error) {
-		if(error) {
-			throw error;
-		}
+		if(error) throw error;
 		console.log('done');
 	}
 );
@@ -112,6 +121,7 @@ Applies the function `iterator` to each item in `object`, serial. `iterator` is 
 
 #### Example
 ```node
+// will log 2 messages to console: 'The value of key1 is foo'; 'The value of key2 is bla'
 AObject.eachSync(
 	{
 		key1: 'foo',
@@ -135,6 +145,7 @@ Adds all keys of `newObject` and their values recursively to currentObject or ov
 
 #### Example
 ```node
+// currentObject will be {key1: 'foo', key2: 'bla2', key3: 'foo2'}
 AObject.update(
 	{
 		key1: 'foo',
@@ -154,8 +165,8 @@ AObject.compareKeys(mixed expectedObject, object object);
 Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
 
 #### Arguments
-- mixed `expectedObject` - The object for comparison. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
 - object `object` - The object to be compared with `expectedObject`.
+- mixed `expectedObject` - The object for comparison. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
 - bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: false
 
 Note, that by default all keys of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be keys not given in `expectedObject`.
@@ -189,5 +200,31 @@ AObject.compareKeys(
 		key1: 'foo',
 		key2: 'bla'
 	}
+);
+```
+
+### AObject.getKeys()
+```node
+AObject.getKeys(object object, array keys);
+```
+Returns all keys in `keys` of `object`.
+
+#### Arguments
+- object `object` - The object the wanted values are in.
+- array `keys` - An array with all keys to be returned.
+
+#### Example
+```node
+// returns {first: 'one', third: 'four'}
+AObject.getKeys(
+	{
+		first: 'one',
+		second: 'seven',
+		third: 'four'
+	},
+	[
+		'first',
+		'third'
+	]
 );
 ```
