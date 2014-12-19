@@ -14,13 +14,17 @@ ObjectAnalyzr.prototype.update = function(newObject) {
 	ObjectAnalyzr.update(this.object, newObject);
 };
 
-ObjectAnalyzr.prototype.compareKeys = function(object) {
+ObjectAnalyzr.prototype.compare = function(object) {
 	ObjectAnalyzr.compareKeys(this.object, object);
 };
 
-ObjectAnalyzr.prototype.getKeys = function(keys) {
+ObjectAnalyzr.prototype.compareKeys = ObjectAnalyzr.prototype.compare; // deprecated alias
+
+ObjectAnalyzr.prototype.get = function(keys) {
 	ObjectAnalyzr.get(this.object, keys);
 };
+
+ObjectAnalyzr.prototype.getKeys = ObjectAnalyzr.prototype.get; // deprecated alias
 
 ObjectAnalyzr.each = function(object, iterator, next) {
 	var length = Object.keys(object).length,
@@ -86,12 +90,16 @@ ObjectAnalyzr.compareKeys = function(object, expectedObject, strict) {
 	return equal;
 };
 
-ObjectAnalyzr.getKeys = function(object, keys) {
+ObjectAnalyzr.compare = ObjectAnalyzr.compare; // deprecated alias
+
+ObjectAnalyzr.get = function(object, keys) {
 	returnObject = {};
 	keys.forEach(function(value) {
 		returnObject[value] = object[value];
 	});
 	return returnObject;
 };
+
+ObjectAnalyzt.getKeys = ObjectAnalyzr.get; // deprecated alias
 
 module.exports = ObjectAnalyzr;
