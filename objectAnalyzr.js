@@ -1,28 +1,28 @@
-function AObject(object) {
+function ObjectAnalyzr(object) {
 	this.object = object;
 }
 
-AObject.prototype.each = function(iterator, next) {
-	AObject.each(this.object, iterator, next);
+ObjectAnalyzr.prototype.each = function(iterator, next) {
+	ObjectAnalyzr.each(this.object, iterator, next);
 };
 
-AObject.prototype.eachSync = function(iterator) {
-	AObject.eachSync(this.object, iterator);
+ObjectAnalyzr.prototype.eachSync = function(iterator) {
+	ObjectAnalyzr.eachSync(this.object, iterator);
 };
 
-AObject.prototype.update = function(newObject) {
-	AObject.update(this.object, newObject);
+ObjectAnalyzr.prototype.update = function(newObject) {
+	ObjectAnalyzr.update(this.object, newObject);
 };
 
-AObject.prototype.compareKeys = function(object) {
-	AObject.compareKeys(this.object, object);
+ObjectAnalyzr.prototype.compareKeys = function(object) {
+	ObjectAnalyzr.compareKeys(this.object, object);
 };
 
-AObject.prototype.getKeys = function(keys) {
-	AObject.get(this.object, keys);
+ObjectAnalyzr.prototype.getKeys = function(keys) {
+	ObjectAnalyzr.get(this.object, keys);
 };
 
-AObject.each = function(object, iterator, next) {
+ObjectAnalyzr.each = function(object, iterator, next) {
 	var length = Object.keys(object).length,
 		completed = 0,
 		root,
@@ -49,23 +49,23 @@ AObject.each = function(object, iterator, next) {
 	}
 };
 
-AObject.eachSync = function(object, iterator) {
+ObjectAnalyzr.eachSync = function(object, iterator) {
 	Object.keys(object).forEach(function(key) {
 		iterator(key, object[key]);
 	});
 };
 
-AObject.update = function(currentObject, newObject) {
+ObjectAnalyzr.update = function(currentObject, newObject) {
 	Object.keys(newObject).forEach(function(key) {
 		if(typeof newObject[key] == 'object') {
 			if(typeof currentObject[key] == 'undefined') currentObject[key] = {};
-			return AObject.update(currentObject[key], newObject[key]);
+			return ObjectAnalyzr.update(currentObject[key], newObject[key]);
 		}
 		currentObject[key] = newObject[key];
 	});
 };
 
-AObject.compareKeys = function(object, expectedObject, strict) {
+ObjectAnalyzr.compareKeys = function(object, expectedObject, strict) {
 	var equal = true;
 	if(Array.isArray(expectedObject)) {
 		expectedObject.forEach(function(key) {
@@ -75,18 +75,18 @@ AObject.compareKeys = function(object, expectedObject, strict) {
 		Object.keys(expectedObject).forEach(function(key) {
 			if(typeof expectedObject[key] == 'object') {
 				if(typeof object[key] == 'object') {
-					if(!AObject.compareKeys(expectedObject[key], object[key])) equal = false;
+					if(!ObjectAnalyzr.compareKeys(expectedObject[key], object[key])) equal = false;
 				} else equal = false;
 			} else if(typeof object[key] == 'undefined') equal = false;
 		});
 	}
 	if(strict) {
-		if(!AObject.compareKeys(expectedObject, object)) equal = false;
+		if(!ObjectAnalyzr.compareKeys(expectedObject, object)) equal = false;
 	}
 	return equal;
 };
 
-AObject.getKeys = function(object, keys) {
+ObjectAnalyzr.getKeys = function(object, keys) {
 	returnObject = {};
 	keys.forEach(function(value) {
 		returnObject[value] = object[value];
@@ -94,4 +94,4 @@ AObject.getKeys = function(object, keys) {
 	return returnObject;
 };
 
-module.exports = AObject;
+module.exports = ObjectAnalyzr;
