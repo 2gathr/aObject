@@ -205,13 +205,13 @@ ObjectAnalyzr.compare(
 
 ### ObjectAnalyzr.get()
 ```node
-ObjectAnalyzr.get(object object, array keys);
+ObjectAnalyzr.get(object object, mixed keys);
 ```
 Returns all keys in `keys` of `object`.
 
 #### Arguments
 - object `object` - The object the wanted values are in.
-- array `keys` - An array with all keys to be returned.
+- mixed `keys` - An array or object with all keys to be returned. If it's an array the items of `object` will be returned unchanged. If it's an object, all keys of `object` given as keys of `keys` are returned renamed as the concerning values of `keys`.
 
 #### Example
 ```node
@@ -227,4 +227,16 @@ ObjectAnalyzr.get(
 		'third'
 	]
 );
+// returns {fifth: 'one', second: 'four'}
+ObjectAnalyzr.get(
+	{
+		first: 'one',
+		second: 'seven',
+		third: 'four'
+	},
+	{
+		first: 'fifth',
+		third: 'second'
+	}
+)
 ```

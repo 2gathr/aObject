@@ -88,9 +88,15 @@ ObjectAnalyzr.compareKeys = function(object, expectedObject, strict) {
 
 ObjectAnalyzr.get = function(object, keys) {
 	returnObject = {};
-	keys.forEach(function(value) {
-		returnObject[value] = object[value];
-	});
+	if(Array.isArray(keys)) {
+		keys.forEach(function(value) {
+			returnObject[value] = object[value];
+		});
+	} else {
+		Object.keys(keys).forEach(function(key) {
+			returnObject[keys[key]] = object[key];
+		});
+	}
 	return returnObject;
 };
 
