@@ -67,9 +67,6 @@ Calls `ObjectAnalyzr.compare()` with the object given in `ObjectAnalyzr()` as `o
 - mixed `object` - The object for comparision. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
 - bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well. Default: `false`
 
-### ObjectAnalyzr#compareKeys() *Deprecated*
-Deprecated alias for `ObjectAnalyzr#compare()`. Will be removed in version 2.x.
-
 ### ObjectAnalyzr#get()
 ```node
 objectAnalyzr.get(array keys)
@@ -78,9 +75,6 @@ Calls `ObjectAnalyzr.get()` with the object given in `ObjectAnalyzr()` as `objec
 
 #### Arguments
 - array `keys` - All keys of `object` to be returned.
-
-### ObjectAnalyzr#getKeys() *Deprecated*
-Deprecated alias for `ObjectAnalyzr#get()`. Will be removed in version 2.x.
 
 ### ObjectAnalyzr.each()
 ```node
@@ -209,9 +203,6 @@ ObjectAnalyzr.compare(
 );
 ```
 
-### ObjectAnalyzr.compareKeys() *Deprecated*
-Deprecated alias for `ObjectAnalyzr.compare()`. Will be removed in version 2.x.
-
 ### ObjectAnalyzr.get()
 ```node
 ObjectAnalyzr.get(object object, array keys);
@@ -237,6 +228,3 @@ ObjectAnalyzr.get(
 	]
 );
 ```
-
-### ObjectAnalyzr.getKeys() *Deprecated*
-Deprecated alias for `ObjectAnalyzr.get()`. Will be removed in version 2.x.
