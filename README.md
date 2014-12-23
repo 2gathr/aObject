@@ -74,7 +74,7 @@ objectAnalyzr.get(array keys)
 Calls `ObjectAnalyzr.get()` with the object given in `ObjectAnalyzr()` as `object`.
 
 #### Arguments
-- array `keys` - All keys of `object` to be returned.
+- mixed `keys` - An array or object with all keys to be returned. If it's an array the items of `object` will be returned unchanged. If it's an object, all keys of `object` given as keys of `keys` are returned renamed as the concerning values of `keys`.
 
 ### ObjectAnalyzr.each()
 ```node
