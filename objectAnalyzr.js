@@ -87,7 +87,7 @@ ObjectAnalyzr.compareKeys = function(object, expectedObject, strict) {
 };
 
 ObjectAnalyzr.get = function(object, keys) {
-	returnObject = {};
+	var returnObject = {};
 	if(Array.isArray(keys)) {
 		keys.forEach(function(value) {
 			returnObject[value] = object[value];
@@ -98,6 +98,15 @@ ObjectAnalyzr.get = function(object, keys) {
 		});
 	}
 	return returnObject;
+};
+
+ObjectAnalyzr.getValues = function(object, keys) {
+	var returnArray = {};
+	if(typeof keys == 'undefined') keys = Object.keys(keys);
+	keys.forEach(function(key) {
+		returnArray.push(object[key]);
+	});
+	return returnArray;
 };
 
 module.exports = ObjectAnalyzr;

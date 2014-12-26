@@ -160,7 +160,7 @@ ObjectAnalyzr.update(
 
 ### ObjectAnalyzr.compare()
 ```node
-ObjectAnalyzr.compare(mixed expectedObject, object object);
+ObjectAnalyzr.compare(mixed expectedObject, object object[, bool strict]);
 ```
 Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
 
@@ -239,4 +239,37 @@ ObjectAnalyzr.get(
 		third: 'second'
 	}
 )
+```
+
+### ObjectAnalyzr.getValues()
+```node
+ObjectAnalyzr.getValues(object object[, array keys]);
+```
+Return part of or all values of `object`.
+
+#### Arguments
+- object `object` - The object with the wanted values.
+- array `keys` - All keys of `object` you want the values of. If this argument is undefined, all values of `object` are returned.
+
+#### Example
+```node
+// returns {foo: 'bar3', foo2: 'bar4'}
+ObjectAnalyzr.getValues(
+	{
+		foo: 'bar3',
+		foo2: 'bar4'
+	}
+);
+// returns {foo: 'bar4', foo3: 'bar6'}
+ObjectAnalyzr.getValues(
+	{
+		foo: 'bar4',
+		foo2: 'bar5',
+		foo3: 'bar6'
+	},
+	[
+		foo,
+		foo3
+	]
+);
 ```
