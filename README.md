@@ -5,77 +5,13 @@ A Node.js module for iterating through objects asynchronously and synchronously,
 
 ## Usage
 ```sh
-npm install a-object
+npm install object-analyzr --save
 ```
 ```node
-var ObjectAnalyzr = require('a-object');
+var objectAnalyzr = require('object-analyzr');
 ```
 
 ## Functions
-### ObjectAnalyzr()
-```node
-var objectAnalyzr = new ObjectAnalyzr(object object);
-```
-Creates a new instance of `ObjectAnalyzr` with the given `object`.
-
-#### Arguments
-- object `object` - The object to use for instance functions.
-
-#### Example
-```node
-var objectAnalyzr = new ObjectAnalyzr({
-	key1: 'foo',
-	key2: 'bla'
-});
-```
-
-### ObjectAnalyzr#each()
-```node
-objectAnalyzr.each(function iterator, function callback);
-```
-Calls `ObjectAnalyzr.each()` with the object given in `ObjectAnalyzr()` as `object`.
-
-#### Arguments
-- function `iterator(string key, mixed value, function callback)` - A function to apply to each item in `object`. `iterator` is passed a `callback(error)` which must be called once it has completed. If no error has occurred, the callback should be run without arguments or with an explicit null argument.
-- function `callback(error)` - A callback which is called when all iterator functions have finished, or an error occurs.
-
-### ObjectAnalyzr#eachSync()
-```node
-objectAnalyzr.eachSync(function iterator);
-```
-Calls `ObjectAnalyzr.eachSync()` with the object given in `ObjectAnalyzr()` as `object`.
-
-#### Arguments
-- function `iterator(string key, mixed value)` - A function to apply to each item in `object`.
-
-### ObjectAnalyzr#update()
-```node
-objectAnalyzr.update(object newObject);
-```
-Calls `ObjectAnalyzr.update()` with the object given in `ObjectAnalyzr()` as `newObject`.
-
-#### Arguments
-- object `newObject` - The object to be merged into `currentObject`.
-
-### ObjectAnalyzr#compare()
-```node
-objectAnalyzr.compare(mixed expectedObject);
-```
-Calls `ObjectAnalyzr.compare()` with the object given in `ObjectAnalyzr()` as `object`.
-
-#### Arguments
-- mixed `object` - The object for comparision. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
-- bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well. Default: `false`
-
-### ObjectAnalyzr#get()
-```node
-objectAnalyzr.get(array keys)
-```
-Calls `ObjectAnalyzr.get()` with the object given in `ObjectAnalyzr()` as `object`.
-
-#### Arguments
-- mixed `keys` - An array or object with all keys to be returned. If it's an array the items of `object` will be returned unchanged. If it's an object, all keys of `object` given as keys of `keys` are returned renamed as the concerning values of `keys`.
-
 ### ObjectAnalyzr.each()
 ```node
 ObjectAnalyzr.each(object object, function iterator, function callback);
@@ -158,9 +94,9 @@ ObjectAnalyzr.update(
 );
 ```
 
-### ObjectAnalyzr.compare()
+### ObjectAnalyzr.compareKeys()
 ```node
-ObjectAnalyzr.compare(mixed expectedObject, object object[, bool strict]);
+ObjectAnalyzr.compareKeys(mixed expectedObject, object object[, bool strict]);
 ```
 Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
 
@@ -176,7 +112,7 @@ If `strict` is set to true, all keys of `object` have to exist in `expectedObjec
 #### Example
 ```node
 // returns true
-ObjectAnalyzr.compare(
+ObjectAnalyzr.compareKeys(
 	{
 		key1: 'foo',
 		key2: {
@@ -191,7 +127,7 @@ ObjectAnalyzr.compare(
 	}
 );
 // returns false
-ObjectAnalyzr.compare(
+ObjectAnalyzr.compareKeys(
 	[
 		'key1',
 		'key3'

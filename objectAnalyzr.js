@@ -1,28 +1,6 @@
-function ObjectAnalyzr(object) {
-	this.object = object;
-}
+objectAnalyzr = {};
 
-ObjectAnalyzr.prototype.each = function(iterator, next) {
-	ObjectAnalyzr.each(this.object, iterator, next);
-};
-
-ObjectAnalyzr.prototype.eachSync = function(iterator) {
-	ObjectAnalyzr.eachSync(this.object, iterator);
-};
-
-ObjectAnalyzr.prototype.update = function(newObject) {
-	ObjectAnalyzr.update(this.object, newObject);
-};
-
-ObjectAnalyzr.prototype.compare = function(object) {
-	ObjectAnalyzr.compareKeys(this.object, object);
-};
-
-ObjectAnalyzr.prototype.get = function(keys) {
-	ObjectAnalyzr.get(this.object, keys);
-};
-
-ObjectAnalyzr.each = function(object, iterator, next) {
+objectAnalyzr.each = function(object, iterator, next) {
 	var length = Object.keys(object).length,
 		completed = 0,
 		root,
@@ -49,23 +27,23 @@ ObjectAnalyzr.each = function(object, iterator, next) {
 	}
 };
 
-ObjectAnalyzr.eachSync = function(object, iterator) {
+objectAnalyzr.eachSync = function(object, iterator) {
 	Object.keys(object).forEach(function(key) {
 		iterator(key, object[key]);
 	});
 };
 
-ObjectAnalyzr.update = function(currentObject, newObject) {
+objectAnalyzr.update = function(currentObject, newObject) {
 	Object.keys(newObject).forEach(function(key) {
 		if(typeof newObject[key] == 'object') {
 			if(typeof currentObject[key] == 'undefined') currentObject[key] = {};
-			return ObjectAnalyzr.update(currentObject[key], newObject[key]);
+			return objectAnalyzr.update(currentObject[key], newObject[key]);
 		}
 		currentObject[key] = newObject[key];
 	});
 };
 
-ObjectAnalyzr.compareKeys = function(object, expectedObject, strict) {
+objectAnalyzr.compareKeys = function(object, expectedObject, strict) {
 	var equal = true;
 	if(Array.isArray(expectedObject)) {
 		expectedObject.forEach(function(key) {
@@ -75,18 +53,18 @@ ObjectAnalyzr.compareKeys = function(object, expectedObject, strict) {
 		Object.keys(expectedObject).forEach(function(key) {
 			if(typeof expectedObject[key] == 'object') {
 				if(typeof object[key] == 'object') {
-					if(!ObjectAnalyzr.compareKeys(expectedObject[key], object[key])) equal = false;
+					if(!objectAnalyzr.compareKeys(expectedObject[key], object[key])) equal = false;
 				} else equal = false;
 			} else if(typeof object[key] == 'undefined') equal = false;
 		});
 	}
 	if(strict) {
-		if(!ObjectAnalyzr.compareKeys(expectedObject, object)) equal = false;
+		if(!objectAnalyzr.compareKeys(expectedObject, object)) equal = false;
 	}
 	return equal;
 };
 
-ObjectAnalyzr.get = function(object, keys) {
+objectAnalyzr.get = function(object, keys) {
 	var returnObject = {};
 	if(Array.isArray(keys)) {
 		keys.forEach(function(value) {
@@ -100,7 +78,7 @@ ObjectAnalyzr.get = function(object, keys) {
 	return returnObject;
 };
 
-ObjectAnalyzr.getValues = function(object, keys) {
+objectAnalyzr.getValues = function(object, keys) {
 	var returnArray = {};
 	if(typeof keys == 'undefined') keys = Object.keys(keys);
 	keys.forEach(function(key) {
@@ -109,4 +87,4 @@ ObjectAnalyzr.getValues = function(object, keys) {
 	return returnArray;
 };
 
-module.exports = ObjectAnalyzr;
+module.exports = objectAnalyzr;
