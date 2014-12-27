@@ -1,7 +1,7 @@
-# ObjectAnalyzr
+# objectAnalyzr
 A Node.js module for iterating through objects asynchronously and synchronously, updating them recursivley and comparing their keys.
 
-**License** [GNU GPL v3.0](https://github.com/2gathr/ObjectAnalyzr/blob/master/LICENSE)
+**License** [GNU GPL v3.0](https://github.com/2gathr/objectAnalyzr/blob/master/LICENSE)
 
 ## Usage
 ```sh
@@ -12,9 +12,9 @@ var objectAnalyzr = require('object-analyzr');
 ```
 
 ## Functions
-### ObjectAnalyzr.each()
+### objectAnalyzr.each()
 ```node
-ObjectAnalyzr.each(object object, function iterator, function callback);
+objectAnalyzr.each(object object, function iterator, function callback);
 ```
 Applies the function `iterator` to each item in `object`, in parallel. `iterator` is called with a key and a value from the object, and a callback for when it has finished. If the iterator passes an error to its callback, the main callback (for the each function) is immediately called with the error.
 
@@ -28,7 +28,7 @@ Note, that since this function applies iterator to each item in parallel, there 
 #### Example
 ```node
 // will log 'done' to console if no error occurs in the iterator function
-ObjectAnalyzr.each(
+objectAnalyzr.each(
 	{
 		key1: 'foo',
 		key2: 'bla',
@@ -45,9 +45,9 @@ ObjectAnalyzr.each(
 );
 ```
 
-### ObjectAnalyzr.eachSync()
+### objectAnalyzr.eachSync()
 ```node
-ObjectAnalyzr.eachSync(object object, function iterator);
+objectAnalyzr.eachSync(object object, function iterator);
 ```
 Applies the function `iterator` to each item in `object`, serial. `iterator` is called with a key and a value from the object.
 
@@ -58,7 +58,7 @@ Applies the function `iterator` to each item in `object`, serial. `iterator` is 
 #### Example
 ```node
 // will log 2 messages to console: 'The value of key1 is foo'; 'The value of key2 is bla'
-ObjectAnalyzr.eachSync(
+objectAnalyzr.eachSync(
 	{
 		key1: 'foo',
 		key2: 'bla'
@@ -69,9 +69,9 @@ ObjectAnalyzr.eachSync(
 );
 ```
 
-### ObjectAnalyzr.update()
+### objectAnalyzr.update()
 ```node
-ObjectAnalyzr.update(object currentObject, object newObject);
+objectAnalyzr.update(object currentObject, object newObject);
 ```
 Adds all keys of `newObject` and their values recursively to currentObject or overwrites existing ones.
 
@@ -82,7 +82,7 @@ Adds all keys of `newObject` and their values recursively to currentObject or ov
 #### Example
 ```node
 // currentObject will be {key1: 'foo', key2: 'bla2', key3: 'foo2'}
-ObjectAnalyzr.update(
+objectAnalyzr.update(
 	{
 		key1: 'foo',
 		key2: 'bla',
@@ -94,16 +94,16 @@ ObjectAnalyzr.update(
 );
 ```
 
-### ObjectAnalyzr.compareKeys()
+### objectAnalyzr.compareKeys()
 ```node
-ObjectAnalyzr.compareKeys(mixed expectedObject, object object[, bool strict]);
+objectAnalyzr.compareKeys(mixed expectedObject, object object[, bool strict]);
 ```
 Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
 
 #### Arguments
 - object `object` - The object to be compared with `expectedObject`.
 - mixed `expectedObject` - The object for comparison. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
-- bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: false
+- bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: `false`.
 
 Note, that by default all keys of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be keys not given in `expectedObject`.
 
@@ -112,7 +112,7 @@ If `strict` is set to true, all keys of `object` have to exist in `expectedObjec
 #### Example
 ```node
 // returns true
-ObjectAnalyzr.compareKeys(
+objectAnalyzr.compareKeys(
 	{
 		key1: 'foo',
 		key2: {
@@ -127,7 +127,7 @@ ObjectAnalyzr.compareKeys(
 	}
 );
 // returns false
-ObjectAnalyzr.compareKeys(
+objectAnalyzr.compareKeys(
 	[
 		'key1',
 		'key3'
@@ -139,9 +139,59 @@ ObjectAnalyzr.compareKeys(
 );
 ```
 
-### ObjectAnalyzr.get()
+### objectAnalyzr.compare()
 ```node
-ObjectAnalyzr.get(object object, mixed keys);
+objectAnalyzr.compare(mixed object, mixed expectedObject[, bool strict]);
+```
+Compares recursively if all elements of `expectedObject` exist in `object` as well and have the same content. If `strict` is true, the comparison will be bidirectional.
+
+#### Arguments
+- mixed `object` - The array or object to compare with.
+- mixed `expectedObject` - The array or object for comparison.
+- bool `strict` - Wether all values of `object` have to exist in `expectedObject` as well. Default: `true`.
+
+#### Example
+```node
+// returns true
+objectAnalyzr.compare(
+	{
+		1: '2',
+		3: [
+			7,
+			9
+		],
+		4: '5'
+	},
+	{
+		1: '2',
+		3: [
+			7,
+			9
+		]
+	}
+);
+// return false
+objectAnalyzr.compare(
+	{
+		1: '2',
+		3: [
+			4,
+			5
+		]
+	},
+	{
+		1: '2',
+		3: [
+			4,
+			7
+		]
+	}
+);
+```
+
+### objectAnalyzr.get()
+```node
+objectAnalyzr.get(object object, mixed keys);
 ```
 Returns all keys in `keys` of `object`.
 
@@ -152,7 +202,7 @@ Returns all keys in `keys` of `object`.
 #### Example
 ```node
 // returns {first: 'one', third: 'four'}
-ObjectAnalyzr.get(
+objectAnalyzr.get(
 	{
 		first: 'one',
 		second: 'seven',
@@ -164,7 +214,7 @@ ObjectAnalyzr.get(
 	]
 );
 // returns {fifth: 'one', second: 'four'}
-ObjectAnalyzr.get(
+objectAnalyzr.get(
 	{
 		first: 'one',
 		second: 'seven',
@@ -177,9 +227,9 @@ ObjectAnalyzr.get(
 )
 ```
 
-### ObjectAnalyzr.getValues()
+### objectAnalyzr.getValues()
 ```node
-ObjectAnalyzr.getValues(object object[, array keys]);
+objectAnalyzr.getValues(object object[, array keys]);
 ```
 Return part of or all values of `object`.
 
@@ -190,14 +240,14 @@ Return part of or all values of `object`.
 #### Example
 ```node
 // returns {foo: 'bar3', foo2: 'bar4'}
-ObjectAnalyzr.getValues(
+objectAnalyzr.getValues(
 	{
 		foo: 'bar3',
 		foo2: 'bar4'
 	}
 );
 // returns {foo: 'bar4', foo3: 'bar6'}
-ObjectAnalyzr.getValues(
+objectAnalyzr.getValues(
 	{
 		foo: 'bar4',
 		foo2: 'bar5',

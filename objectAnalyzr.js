@@ -58,9 +58,28 @@ objectAnalyzr.compareKeys = function(object, expectedObject, strict) {
 			} else if(typeof object[key] == 'undefined') equal = false;
 		});
 	}
-	if(strict) {
-		if(!objectAnalyzr.compareKeys(expectedObject, object)) equal = false;
+	if(strict && !objectAnalyzr.compareKeys(expectedObject, object)) equal = false;
+	return equal;
+};
+
+objectAnalyzr.compare = function(object, expectedObject, strict) {
+	var equal = true;
+	if(Array.isArray(expectedObject)) {
+		if(!Array.isArray(object) || expectedObject.length != object.length) return (equal = false);
+		Object.keys(expectedObject).forEach(function(key) {
+			if(typeof expectedObject[key] == 'object') {
+				if(!objectAnalyzr.compare(object[key], expectedObject[key])) equal = false;
+			} else if(expectedObject[key] !== object[key]) equal = false;
+		});
+	} else {
+		if(typeof object != 'object') return (equal = false);
+		Object.keys(expectedObject).forEach(function(key) {
+			if(typeof object[key] == 'object') {
+				if(!objectAnalyzr.compare(object[key], expectedObject[key])) equal = false;
+			} else if(expectedObject[key] !== object[key]) equal = false;
+		});
 	}
+	if(strict && !objectAnalyzr.compare(expectedObject, object)) equal = false;
 	return equal;
 };
 
