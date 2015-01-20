@@ -239,14 +239,14 @@ Return part of or all values of `object`.
 
 #### Example
 ```node
-// returns {foo: 'bar3', foo2: 'bar4'}
+// returns ['bar3', 'bar4']
 objectAnalyzr.getValues(
 	{
 		foo: 'bar3',
 		foo2: 'bar4'
 	}
 );
-// returns {foo: 'bar4', foo3: 'bar6'}
+// returns ['bar4', 'bar6']
 objectAnalyzr.getValues(
 	{
 		foo: 'bar4',
