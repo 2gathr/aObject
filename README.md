@@ -33,13 +33,13 @@ objectAnalyzr.each(
 		key1: 'foo',
 		key2: 'bla',
 	},
-	function(key, value, next) {
+	function(key, val, next) {
 		// Do some asynchronous stuff with key and value
 		if(err) next(err); // Ooops ... error ...
 		next();
 	},
-	function(error) {
-		if(error) throw error;
+	function(err) {
+		if(err) throw error;
 		console.log('done');
 	}
 );
@@ -71,9 +71,9 @@ objectAnalyzr.eachSync(
 
 ### objectAnalyzr.update()
 ```node
-objectAnalyzr.update(object currentObject, object newObject, number depth);
+objectAnalyzr.update(object currentObject, object newObject[, number depth]);
 ```
-Adds all keys of `newObject` and their values recursively to currentObject or overwrites existing ones.
+Adds all keys of `newObject` and their values recursively to currentObject and overwrites existing ones.
 
 #### Arguments
 - object `currentObject` - The object to be updated.
@@ -188,7 +188,7 @@ objectAnalyzr.compare(
 		]
 	}
 );
-// return false
+// returns false
 objectAnalyzr.compare(
 	{
 		1: '2',
@@ -211,11 +211,11 @@ objectAnalyzr.compare(
 ```node
 objectAnalyzr.get(object object, mixed keys);
 ```
-Returns all keys in `keys` of `object`.
+Returns `object` reduced to the keys in `keys`.
 
 #### Arguments
 - object `object` - The object the wanted values are in.
-- mixed `keys` - An array or object with all keys to be returned. If it's an array the items of `object` will be returned unchanged. If it's an object, all keys of `object` given as keys of `keys` are returned renamed as the concerning values of `keys`.
+- mixed `keys` - An array or object with all keys to be preserved. If it's an object, only the keys that are present in `keys` are preserved, plus they are renamed to the corresponding value in `keys`.
 
 #### Example
 ```node
@@ -272,8 +272,8 @@ objectAnalyzr.getValues(
 		foo3: 'bar6'
 	},
 	[
-		foo,
-		foo3
+		'foo',
+		'foo3'
 	]
 );
 ```
