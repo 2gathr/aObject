@@ -33,11 +33,11 @@ objectAnalyzr.eachSync = function(object, iterator) {
 	});
 };
 
-objectAnalyzr.update = function(currentObject, newObject) {
+objectAnalyzr.update = function(currentObject, newObject, depth) {
 	Object.keys(newObject).forEach(function(key) {
-		if(typeof newObject[key] == 'object') {
+		if(typeof newObject[key] == 'object' && depth > 0) {
 			if(typeof currentObject[key] == 'undefined') currentObject[key] = {};
-			return objectAnalyzr.update(currentObject[key], newObject[key]);
+			return objectAnalyzr.update(currentObject[key], newObject[key], depth ? depth - 1 : null);
 		}
 		currentObject[key] = newObject[key];
 	});

@@ -71,13 +71,14 @@ objectAnalyzr.eachSync(
 
 ### objectAnalyzr.update()
 ```node
-objectAnalyzr.update(object currentObject, object newObject);
+objectAnalyzr.update(object currentObject, object newObject, number depth);
 ```
 Adds all keys of `newObject` and their values recursively to currentObject or overwrites existing ones.
 
 #### Arguments
 - object `currentObject` - The object to be updated.
 - object `newObject` - The object to be merged into `currentObject`.
+- number `depth` - The depth of recursive updating. All further nesting will be ignored and the concerning part of `currentObject` will be the same as the conerning one of `newObject`. `null` for infinite recursion. Default: `null`.
 
 #### Example
 ```node
@@ -92,6 +93,23 @@ objectAnalyzr.update(
 		key3: 'foo2'
 	}
 );
+// currentObject will be {key1: 'foo2', key2: {key3: 'bla1', key5: 'bla3'}, key3: 'foo2'}
+objectAnalyzr.update(
+	{
+		key1: 'foo',
+		key2: {
+			key3: 'bla1',
+			key4: 'bla2'
+		}
+	},
+	{
+		key2: {
+			key3: 'bla1',
+			key5: 'bla3'
+		},
+		key3: 'foo2'
+	}
+)
 ```
 
 ### objectAnalyzr.compareKeys()
