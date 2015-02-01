@@ -30,8 +30,8 @@ Note, that since this function applies iterator to each item in parallel, there 
 // will log 'done' to console if no error occurs in the iterator function
 objectAnalyzr.each(
 	{
-		key1: 'foo',
-		key2: 'bla',
+		one: 'foo',
+		two: 'bar',
 	},
 	function(key, val, next) {
 		// Do some asynchronous stuff with key and value
@@ -57,11 +57,11 @@ Applies the function `iterator` to each item in `object`, serial. `iterator` is 
 
 #### Example
 ```node
-// will log 2 messages to console: 'The value of key1 is foo'; 'The value of key2 is bla'
+// will log 2 messages to console: 'The value of one is foo'; 'The value of two is bar'
 objectAnalyzr.eachSync(
 	{
-		key1: 'foo',
-		key2: 'bla'
+		one: 'foo',
+		two: 'bar'
 	},
 	function(key, value) {
 		console.log('The value of ' + key + ' is ' + value);
@@ -82,32 +82,32 @@ Adds all keys of `newObject` and their values recursively to currentObject and o
 
 #### Example
 ```node
-// currentObject will be {key1: 'foo', key2: 'bla2', key3: 'foo2'}
+// currentObject will be {one: 'foo', two: 'qux', three: 'corge'}
 objectAnalyzr.update(
 	{
-		key1: 'foo',
-		key2: 'bla',
+		one: 'foo',
+		two: 'bar',
 	},
 	{
-		key2: 'bla2',
-		key3: 'foo2'
+		two: 'qux',
+		three: 'corge'
 	}
 );
-// currentObject will be {key1: 'foo2', key2: {key3: 'bla1', key5: 'bla3'}, key3: 'foo2'}
+// currentObject will be {one: 'foo', two: {twoThree: 'corge', twoFour: 'waldo'}, three: 'fred'}
 objectAnalyzr.update(
 	{
-		key1: 'foo',
-		key2: {
-			key3: 'bla1',
-			key4: 'bla2'
+		one: 'foo',
+		two: {
+			twoOne: 'bar',
+			twoTwo: 'qux'
 		}
 	},
 	{
-		key2: {
-			key3: 'bla1',
-			key5: 'bla3'
+		two: {
+			twoThree: 'corge',
+			twoFour: 'waldo'
 		},
-		key3: 'foo2'
+		three: 'fred'
 	}
 )
 ```
@@ -132,27 +132,27 @@ If `strict` is set to true, all keys of `object` have to exist in `expectedObjec
 // returns true
 objectAnalyzr.compareKeys(
 	{
-		key1: 'foo',
-		key2: {
-			key3: 'bla'
+		one: 'foo',
+		two: {
+			twoOne: 'bar'
 		}
 	},
 	{
-		key1: 'foo2',
-		key2: {
-			key3: 'bla2'
+		one: 'qux',
+		two: {
+			twoOne: 'corge'
 		}
 	}
 );
 // returns false
 objectAnalyzr.compareKeys(
 	[
-		'key1',
-		'key3'
+		'one',
+		'two'
 	],
 	{
-		key1: 'foo',
-		key2: 'bla'
+		one: 'foo',
+		three: 'bar'
 	}
 );
 ```
@@ -166,42 +166,42 @@ Compares recursively if all elements of `expectedObject` exist in `object` as we
 #### Arguments
 - mixed `object` - The array or object to compare with.
 - mixed `expectedObject` - The array or object for comparison.
-- bool `strict` - Wether all values of `object` have to exist in `expectedObject` as well. Default: `true`.
+- bool `strict` - Wether all values of `object` have to exist in `expectedObject` as well. Default: `false`.
 
 #### Example
 ```node
 // returns true
 objectAnalyzr.compare(
 	{
-		1: '2',
-		3: [
-			7,
-			9
+		one: 'foo',
+		two: [
+			'bar',
+			'qux'
 		],
-		4: '5'
+		three: 'corge'
 	},
 	{
-		1: '2',
-		3: [
-			7,
-			9
+		one: 'foo',
+		two: [
+			'bar',
+			'qux'
 		]
 	}
 );
 // returns false
 objectAnalyzr.compare(
 	{
-		1: '2',
-		3: [
-			4,
-			5
+		one: 'foo',
+		two: [
+			'bar',
+			'qux'
 		]
 	},
 	{
-		1: '2',
-		3: [
-			4,
-			7
+		one: 'foo',
+		three: [
+			'bar',
+			'qux'
 		]
 	}
 );
@@ -219,28 +219,28 @@ Returns `object` reduced to the keys in `keys`.
 
 #### Example
 ```node
-// returns {first: 'one', third: 'four'}
+// returns {one: 'foo', three: 'qux'}
 objectAnalyzr.get(
 	{
-		first: 'one',
-		second: 'seven',
-		third: 'four'
+		one: 'foo',
+		two: 'bar',
+		three: 'qux'
 	},
 	[
-		'first',
-		'third'
+		'one',
+		'three'
 	]
 );
-// returns {fifth: 'one', second: 'four'}
+// returns {four: 'foo', five: 'qux'}
 objectAnalyzr.get(
 	{
-		first: 'one',
-		second: 'seven',
-		third: 'four'
+		one: 'foo',
+		two: 'bar',
+		three: 'qux'
 	},
 	{
-		first: 'fifth',
-		third: 'second'
+		one: 'four',
+		three: 'five'
 	}
 )
 ```
@@ -257,23 +257,23 @@ Return part of or all values of `object`.
 
 #### Example
 ```node
-// returns ['bar3', 'bar4']
+// returns ['foo', 'bar']
 objectAnalyzr.getValues(
 	{
-		foo: 'bar3',
-		foo2: 'bar4'
+		one: 'foo',
+		two: 'bar'
 	}
 );
-// returns ['bar4', 'bar6']
+// returns ['foo', 'qux']
 objectAnalyzr.getValues(
 	{
-		foo: 'bar4',
-		foo2: 'bar5',
-		foo3: 'bar6'
+		one: 'foo',
+		two: 'bar',
+		three: 'qux'
 	},
 	[
-		'foo',
-		'foo3'
+		'one',
+		'three'
 	]
 );
 ```
