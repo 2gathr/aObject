@@ -46,7 +46,7 @@ objectAnalyzr.eachSync = function(object, iterator) {
 
 objectAnalyzr.update = function(object, extendingObject, options) {
 	if(typeof options == 'number') options = {depth: options};
-	if(!options) options = defaultOptionsUpdate;
+	if(!options) options = defaultOptions.update;
 	else objectAnalyzr.update(options, defaultOptions.update);
 	if(!object) object = extendingObject;
 	Object.keys(extendingObject).forEach(function(key) {
