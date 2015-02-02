@@ -2,7 +2,7 @@ var defaultOptions = {
 	update: {depth: null},
 	compareKeys: {
 		bidirectional: false
-	}
+	},
 	compare: {
 		bidirectional: false,
 		strict: false
