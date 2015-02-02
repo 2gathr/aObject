@@ -71,18 +71,21 @@ objectAnalyzr.eachSync(
 
 ### objectAnalyzr.update()
 ```node
-objectAnalyzr.update(object currentObject, object newObject[, number depth]);
+objectAnalyzr.update(object object, object extendingObject[, mixed options]);
 ```
-Adds all keys of `newObject` and their values recursively to currentObject and overwrites existing ones.
+Adds all keys of `extendingObject` and their values recursively to `object` and overwrites existing ones.
+
+Note that `object` is manipulated directly (objects are passed by reference in JavaScript) and not cloned first, so there is no return.
 
 #### Arguments
 - object `currentObject` - The object to be updated.
-- object `newObject` - The object to be merged into `currentObject`.
-- number `depth` - The depth of recursive updating. All further nesting will be ignored and the concerning part of `currentObject` will be the same as the conerning one of `newObject`. `null` for infinite recursion. Default: `null`.
+- object `newObject` - The object to be merged into `object`.
+- mixed `options` - Object with the wanted setup or the `depth` option as a number. Possible options are listed below:
+	- number `depth` - The depth of recursive updating. All further nesting will be ignored and the concerning part of `object` will be the same as the conerning one of `extendingObject`. `null` for infinite recursion. Default: `null`.
 
 #### Example
 ```node
-// currentObject will be {one: 'foo', two: 'qux', three: 'corge'}
+// object will be {one: 'foo', two: 'qux', three: 'corge'}
 objectAnalyzr.update(
 	{
 		one: 'foo',
@@ -93,7 +96,7 @@ objectAnalyzr.update(
 		three: 'corge'
 	}
 );
-// currentObject will be {one: 'foo', two: {twoThree: 'corge', twoFour: 'waldo'}, three: 'fred'}
+// object will be {one: 'foo', two: {twoThree: 'corge', twoFour: 'waldo'}, three: 'fred'}
 objectAnalyzr.update(
 	{
 		one: 'foo',
@@ -108,8 +111,9 @@ objectAnalyzr.update(
 			twoFour: 'waldo'
 		},
 		three: 'fred'
-	}
-)
+	},
+	{depth: 1}
+);
 ```
 
 ### objectAnalyzr.compareKeys()
@@ -121,11 +125,12 @@ Compares all keys of `object` with the keys of `expectedObject` recursively. If 
 #### Arguments
 - object `object` - The object to be compared with `expectedObject`.
 - mixed `expectedObject` - The object for comparison. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
-- bool `strict` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: `false`.
+- mixed `options` - Object with the wanted setup or the `bidirectional` option (which was `strict` in  all versions < v3.2.0). Possible options are listed below:
+	- boolean `bidirectional` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: `false`.
 
-Note, that by default all keys of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be keys not given in `expectedObject`.
+Note, that by default all keys of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be keys not set in `expectedObject`.
 
-If `strict` is set to true, all keys of `object` have to exist in `expectedObject` as well, so the comparison is bidirectional.
+If `options.bidirectional` is set to true, all keys of `object` have to exist in `expectedObject` as well, so the comparison is bidirectional.
 
 #### Example
 ```node
@@ -166,7 +171,13 @@ Compares recursively if all elements of `expectedObject` exist in `object` as we
 #### Arguments
 - mixed `object` - The array or object to compare with.
 - mixed `expectedObject` - The array or object for comparison.
-- bool `strict` - Wether all values of `object` have to exist in `expectedObject` as well. Default: `false`.
+- mixed `options` - Object with the wanted setup or the `bidirectional` option (which was `strict` in  all versions < v3.2.0). Possible options are listed below:
+	- boolean `bidirectional` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: `false`.
+	- boolean `strict` - Whether the comparison of the values of all properties are made with !== (without type conversion) or with != (with type conversion).
+
+Note, that by default all properties of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be properties not set in `expectedObject`.
+
+If `options.bidirectional` is set to true, all keys of `object` have to exist in `expectedObject` as well, so the comparison is bidirectional.
 
 #### Example
 ```node
