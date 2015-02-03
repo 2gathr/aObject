@@ -7,13 +7,13 @@ A Node.js module for iterating through objects asynchronously and synchronously,
 ```sh
 npm install object-analyzr --save
 ```
-```node
+```js
 var objectAnalyzr = require('object-analyzr');
 ```
 
 ## Functions
 ### objectAnalyzr.each()
-```node
+```js
 objectAnalyzr.each(object object, function iterator, function callback);
 ```
 Applies the function `iterator` to each item in `object`, in parallel. `iterator` is called with a key and a value from the object, and a callback for when it has finished. If the iterator passes an error to its callback, the main callback (for the each function) is immediately called with the error.
@@ -26,7 +26,7 @@ Note, that since this function applies iterator to each item in parallel, there 
 - function `callback(error)` - A callback which is called when all iterator functions have finished, or an error occurs.
 
 #### Example
-```node
+```js
 // will log 'done' to console if no error occurs in the iterator function
 objectAnalyzr.each(
 	{
@@ -46,7 +46,7 @@ objectAnalyzr.each(
 ```
 
 ### objectAnalyzr.eachSync()
-```node
+```js
 objectAnalyzr.eachSync(object object, function iterator);
 ```
 Applies the function `iterator` to each item in `object`, serial. `iterator` is called with a key and a value from the object.
@@ -56,7 +56,7 @@ Applies the function `iterator` to each item in `object`, serial. `iterator` is 
 - function `iterator(string key, mixed value)` - A function to apply to each item in `object`.
 
 #### Example
-```node
+```js
 // will log 2 messages to console: 'The value of one is foo'; 'The value of two is bar'
 objectAnalyzr.eachSync(
 	{
@@ -70,7 +70,7 @@ objectAnalyzr.eachSync(
 ```
 
 ### objectAnalyzr.update()
-```node
+```js
 objectAnalyzr.update(object object, object extendingObject[, mixed options]);
 ```
 Adds all keys of `extendingObject` and their values recursively to `object` and overwrites existing ones.
@@ -84,7 +84,7 @@ Note that `object` is manipulated directly (objects are passed by reference in J
 	- number `depth` - The depth of recursive updating. All further nesting will be ignored and the concerning part of `object` will be the same as the conerning one of `extendingObject`. `null` for infinite recursion. Default: `null`.
 
 #### Example
-```node
+```js
 // object will be {one: 'foo', two: 'qux', three: 'corge'}
 objectAnalyzr.update(
 	{
@@ -117,7 +117,7 @@ objectAnalyzr.update(
 ```
 
 ### objectAnalyzr.compareKeys()
-```node
+```js
 objectAnalyzr.compareKeys(mixed expectedObject, object object[, bool strict]);
 ```
 Compares all keys of `object` with the keys of `expectedObject` recursively. If the keys of both objects match exactly `true` will be returned, otherwise `false`.
@@ -133,7 +133,7 @@ Note, that by default all keys of `expectedObject` have to exist in `object` as 
 If `options.bidirectional` is set to true, all keys of `object` have to exist in `expectedObject` as well, so the comparison is bidirectional.
 
 #### Example
-```node
+```js
 // returns true
 objectAnalyzr.compareKeys(
 	{
@@ -163,7 +163,7 @@ objectAnalyzr.compareKeys(
 ```
 
 ### objectAnalyzr.compare()
-```node
+```js
 objectAnalyzr.compare(mixed object, mixed expectedObject[, bool strict]);
 ```
 Compares recursively if all elements of `expectedObject` exist in `object` as well and have the same content. If `strict` is true, the comparison will be bidirectional.
@@ -180,7 +180,7 @@ Note, that by default all properties of `expectedObject` have to exist in `objec
 If `options.bidirectional` is set to true, all keys of `object` have to exist in `expectedObject` as well, so the comparison is bidirectional.
 
 #### Example
-```node
+```js
 // returns true
 objectAnalyzr.compare(
 	{
@@ -219,7 +219,7 @@ objectAnalyzr.compare(
 ```
 
 ### objectAnalyzr.get()
-```node
+```js
 objectAnalyzr.get(object object, mixed keys);
 ```
 Returns `object` reduced to the keys in `keys`.
@@ -229,7 +229,7 @@ Returns `object` reduced to the keys in `keys`.
 - mixed `keys` - An array or object with all keys to be preserved. If it's an object, only the keys that are present in `keys` are preserved, plus they are renamed to the corresponding value in `keys`.
 
 #### Example
-```node
+```js
 // returns {one: 'foo', three: 'qux'}
 objectAnalyzr.get(
 	{
@@ -257,7 +257,7 @@ objectAnalyzr.get(
 ```
 
 ### objectAnalyzr.getValues()
-```node
+```js
 objectAnalyzr.getValues(object object[, array keys]);
 ```
 Return part of or all values of `object`.
@@ -267,7 +267,7 @@ Return part of or all values of `object`.
 - array `keys` - All keys of `object` you want the values of. If this argument is undefined, all values of `object` are returned.
 
 #### Example
-```node
+```js
 // returns ['foo', 'bar']
 objectAnalyzr.getValues(
 	{
