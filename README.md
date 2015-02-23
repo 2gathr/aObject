@@ -35,7 +35,7 @@ objectAnalyzr.each(
 	},
 	function(key, val, next) {
 		// Do some asynchronous stuff with key and value
-		if(err) next(err); // Ooops ... error ...
+		if(err) return next(err); // Ooops ... error ...
 		next();
 	},
 	function(err) {
