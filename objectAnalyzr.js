@@ -7,7 +7,7 @@ var defaultOptions = {
 		bidirectional: false,
 		strict: false
 	}
-}
+};
 
 objectAnalyzr = {};
 
@@ -60,7 +60,7 @@ objectAnalyzr.update = function(object, extendingObject, options) {
 
 objectAnalyzr.compareKeys = function(object, expectedObject, options) {
 	if(typeof options == 'boolean') options = {bidirectional: options};
-	objectAnalyzr.update(options, defaultOptions.compareKeys)
+	objectAnalyzr.update(options, defaultOptions.compareKeys);
 	var equal = true;
 	if(Array.isArray(expectedObject)) {
 		expectedObject.forEach(function(key) {
