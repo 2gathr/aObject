@@ -53,7 +53,7 @@ objectAnalyzr.update = function(object, extendingObject, options) {
 	else objectAnalyzr.update(defaultOptions, options);
 	if(!object) object = extendingObject;
 	Object.keys(extendingObject).forEach(function(key) {
-		if(typeof extendingObject[key] == 'object' && options.depth > 0) {
+		if(typeof extendingObject[key] == 'object' && (options.depth === null || options.depth > 0)) {
 			if(typeof object[key] == 'undefined') object[key] = {};
 			return objectAnalyzr.update(object[key], extendingObject[key], options.depth ? options.depth - 1 : null);
 		}
