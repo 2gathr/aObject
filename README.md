@@ -81,39 +81,37 @@ Note that `object` is manipulated directly (objects are passed by reference in J
 - object `currentObject` - The object to be updated.
 - object `newObject` - The object to be merged into `object`.
 - mixed `options` - Object with the wanted setup or the `depth` option as a number. Possible options are listed below:
-	- number `depth` - The depth of recursive updating. All further nesting will be ignored and the concerning part of `object` will be the same as the conerning one of `extendingObject`. `null` for infinite recursion. Default: `null`.
+	- number `depth` - The depth of recursive updating. All further nesting will be ignored and the concerning part of `object` will be replaced by the one in `extendingObject`. `null` for infinite recursion. Default: `null`.
 
 #### Example
 ```js
-// object will be {one: 'foo', two: 'qux', three: 'corge'}
-objectAnalyzr.update(
-	{
-		one: 'foo',
-		two: 'bar',
-	},
-	{
+var object = {
+	one: 'foo',
+	two: 'bar',
+};
+objectAnalyzr.update(object, {
 		two: 'qux',
 		three: 'corge'
 	}
 );
-// object will be {one: 'foo', two: {twoThree: 'corge', twoFour: 'waldo'}, three: 'fred'}
-objectAnalyzr.update(
-	{
-		one: 'foo',
-		two: {
-			twoOne: 'bar',
-			twoTwo: 'qux'
-		}
-	},
-	{
-		two: {
-			twoThree: 'corge',
-			twoFour: 'waldo'
+console.log(object); // { one: 'foo', two: 'qux', three: 'corge' }
+
+object = {
+	one: 'foo',
+	nested: {
+		two: 'bar',
+		three: 'qux'
+	}
+};
+objectAnalyzr.update(object, {
+		nested: {
+			three: 'corge',
+			four: 'waldo'
 		},
-		three: 'fred'
-	},
-	{depth: 1}
+		five: 'fred'
+	}, { depth: 0 }
 );
+console.log(object);  // { one: 'foo', nested: { three: 'corge', four: 'waldo' }, five: 'fred' }
 ```
 
 ### objectAnalyzr.compareKeys()
