@@ -45,9 +45,12 @@ objectAnalyzr.eachSync = function(object, iterator) {
 };
 
 objectAnalyzr.update = function(object, extendingObject, options) {
+	var defaultOptions = {
+		depth: null
+	};
 	if(typeof options == 'number') options = {depth: options};
-	if(!options) options = defaultOptions.update;
-	else objectAnalyzr.update(options, defaultOptions.update);
+	if(!options) options = defaultOptions;
+	else objectAnalyzr.update(defaultOptions, options);
 	if(!object) object = extendingObject;
 	Object.keys(extendingObject).forEach(function(key) {
 		if(typeof extendingObject[key] == 'object' && options.depth > 0) {
@@ -59,8 +62,11 @@ objectAnalyzr.update = function(object, extendingObject, options) {
 };
 
 objectAnalyzr.compareKeys = function(object, expectedObject, options) {
+	var defaultOptions = {
+		bidirectional: false
+	};
 	if(typeof options == 'boolean') options = {bidirectional: options};
-	objectAnalyzr.update(options, defaultOptions.compareKeys);
+	objectAnalyzr.update(defaultOptions, options);
 	var equal = true;
 	if(Array.isArray(expectedObject)) {
 		expectedObject.forEach(function(key) {
@@ -80,8 +86,12 @@ objectAnalyzr.compareKeys = function(object, expectedObject, options) {
 };
 
 objectAnalyzr.compare = function(object, expectedObject, options) {
+	var defaultOptions = {
+		bidirectional: false,
+		strict: false
+	};
 	if(typeof options == 'boolean') options = {bidirectional: options};
-	objectAnalyzr.update(options, defaultOptions.compare);
+	objectAnalyzr.update(defaultOptions, options);
 	var equal = true;
 	if(Array.isArray(expectedObject)) {
 		if(!Array.isArray(object) || expectedObject.length != object.length) return (equal = false);
