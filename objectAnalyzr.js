@@ -25,7 +25,7 @@ module.exports = exports = (function() {
         next = function() {};
         return;
       }
-      completed++;
+      ++completed;
       if(completed >= length) next();
     }
   };
