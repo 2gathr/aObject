@@ -81,7 +81,7 @@ Note that `object` is manipulated directly (objects are passed by reference in J
 - object `currentObject` - The object to be updated.
 - object `newObject` - The object to be merged into `object`.
 - mixed `options` - Object with the wanted setup or the `depth` option as a number. Possible options are listed below:
-  - number `depth` - The depth of recursive updating. All further nesting will be ignored and the concerning part of `object` will be replaced by the one in `extendingObject`. `null` for infinite recursion. Default: `null`.
+  - number `depth` - The depth of recursive updating. All further nesting will be ignored and the concerning part of `object` will be replaced by the one in `extendingObject`. `null` for infinite recursion. Defaults to `null`.
 
 #### Example
 ```js
@@ -124,9 +124,9 @@ Compares all keys of `object` with the keys of `expectedObject` recursively. If 
 - object `object` - The object to be compared with `expectedObject`.
 - mixed `expectedObject` - The object for comparison. It can be an array as well, where only the keys are given, if `expectedObject` is an array, the comparison isn't recursive.
 - mixed `options` - Object with the wanted setup or the `bidirectional` option (which was `strict` in  all versions < v3.2.0). Possible options are listed below:
-  - boolean `bidirectional` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: `false`.
+  - boolean `bidirectional` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Defaults to `false`.
 
-Note, that by default all keys of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be keys not set in `expectedObject`.
+Note that by default, all keys of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be keys not set in `expectedObject`.
 
 If `options.bidirectional` is set to true, all keys of `object` have to exist in `expectedObject` as well, so the comparison is bidirectional.
 
@@ -170,10 +170,10 @@ Compares recursively if all elements of `expectedObject` exist in `object` as we
 - mixed `object` - The array or object to compare with.
 - mixed `expectedObject` - The array or object for comparison.
 - mixed `options` - Object with the wanted setup or the `bidirectional` option (which was `strict` in  all versions < v3.2.0). Possible options are listed below:
-  - boolean `bidirectional` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Default: `false`.
+  - boolean `bidirectional` - Wether all keys of `object` have to exist in `expectedObject` as well or not. Defaults to `false`.
   - boolean `strict` - Whether the comparison of the values of all properties are made with !== (without type conversion) or with != (with type conversion).
 
-Note, that by default all properties of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be properties not set in `expectedObject`.
+Note that by default, all properties of `expectedObject` have to exist in `object` as well to return `true`, but in `object` there can be properties not set in `expectedObject`.
 
 If `options.bidirectional` is set to true, all keys of `object` have to exist in `expectedObject` as well, so the comparison is bidirectional.
 
