@@ -65,13 +65,20 @@
           one: 'foo',
           nested: {
             two: 'bar',
-            three: 'qux'
+            three: 'qux',
+            evenDeeper: {
+              this: 'isAwesome',
+              and: 'easyToUse'
+            }
           }
         };
         var extendingObject = {
           nested: {
             three: 'corge',
-            four: 'waldo'
+            four: 'waldo',
+            evenDeeper: {
+              this: 'isEvenGreater'
+            }
           },
           five: 'fred'
         };
@@ -81,7 +88,11 @@
           nested: {
             two: 'bar',
             three: 'corge',
-            four: 'waldo'
+            four: 'waldo',
+            evenDeeper: {
+              this: 'isEvenGreater',
+              and: 'easyToUse'
+            }
           },
           five: 'fred'
         });
