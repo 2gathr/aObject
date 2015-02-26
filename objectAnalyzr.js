@@ -42,7 +42,10 @@ module.exports = exports = (function() {
     };
     if(typeof options == 'undefined') options = defaultOptions;
     else if(typeof options != 'object' || options === null) options = {depth: options};
-    else objectAnalyzr.update(defaultOptions, options);
+    else {
+      objectAnalyzr.update(defaultOptions, options);
+      options = defaultOptions;
+    }
     if(typeof object != 'object') object = {}; // if object was set to extendingObject, modifying object would also modify extendingObject
     Object.keys(extendingObject).forEach(function(key) {
       if(typeof extendingObject[key] == 'object' && (options.depth === null || options.depth > 0)) {
@@ -59,7 +62,10 @@ module.exports = exports = (function() {
     };
     if(typeof options == 'undefined') options = defaultOptions;
     else if(typeof options != 'object') options = {bidirectional: options};
-    else objectAnalyzr.update(defaultOptions, options);
+    else {
+      objectAnalyzr.update(defaultOptions, options);
+      options = defaultOptions;
+    }
     if(Array.isArray(expectedObject)) {
       expectedObject.forEach(function(key) {
         if(typeof object[key] == 'undefined') return false;
@@ -84,7 +90,10 @@ module.exports = exports = (function() {
     };
     if(typeof options == 'undefined') options = defaultOptions;
     else if(typeof options != 'object') options = {bidirectional: options};
-    else objectAnalyzr.update(defaultOptions, options);
+    else {
+      objectAnalyzr.update(defaultOptions, options);
+      options = defaultOptions;
+    }
     if(Array.isArray(expectedObject)) {
       if(!Array.isArray(object) || expectedObject.length != object.length) return false;
       Object.keys(expectedObject).forEach(function(key) {
