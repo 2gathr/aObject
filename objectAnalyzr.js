@@ -60,22 +60,21 @@ module.exports = exports = (function() {
     if(typeof options == 'undefined') options = defaultOptions;
     else if(typeof options != 'object') options = {bidirectional: options};
     else objectAnalyzr.update(defaultOptions, options);
-    var equal = true;
     if(Array.isArray(expectedObject)) {
       expectedObject.forEach(function(key) {
-        if(typeof object[key] == 'undefined') equal = false;
+        if(typeof object[key] == 'undefined') return false;
       });
     } else {
       Object.keys(expectedObject).forEach(function(key) {
         if(typeof expectedObject[key] == 'object') {
           if(typeof object[key] == 'object') {
-            if(!objectAnalyzr.compareKeys(expectedObject[key], object[key])) equal = false;
-          } else equal = false;
-        } else if(typeof object[key] == 'undefined') equal = false;
+            if(!objectAnalyzr.compareKeys(expectedObject[key], object[key])) return false;
+          } else return false;
+        } else if(typeof object[key] == 'undefined') return false;
       });
     }
-    if(options.bidirectional && !objectAnalyzr.compareKeys(expectedObject, object)) equal = false;
-    return equal;
+    if(options.bidirectional && !objectAnalyzr.compareKeys(expectedObject, object)) return false;
+    return true;
   };
 
   objectAnalyzr.compare = function(object, expectedObject, options) {
@@ -86,26 +85,25 @@ module.exports = exports = (function() {
     if(typeof options == 'undefined') options = defaultOptions;
     else if(typeof options != 'object') options = {bidirectional: options};
     else objectAnalyzr.update(defaultOptions, options);
-    var equal = true;
     if(Array.isArray(expectedObject)) {
-      if(!Array.isArray(object) || expectedObject.length != object.length) return (equal = false);
+      if(!Array.isArray(object) || expectedObject.length != object.length) return false;
       Object.keys(expectedObject).forEach(function(key) {
         if(typeof expectedObject[key] == 'object') {
-          if(!objectAnalyzr.compare(object[key], expectedObject[key])) equal = false;
-        } else if(options.strict && expectedObject[key] !== object[key]) equal = false;
-        else if (expectedObject[key] != object[key]) equal = false;
+          if(!objectAnalyzr.compare(object[key], expectedObject[key])) return false;
+        } else if(options.strict && expectedObject[key] !== object[key]) return false;
+        else if (expectedObject[key] != object[key]) return false;
       });
     } else {
-      if(typeof object != 'object') equal = false;
+      if(typeof object != 'object') return false;
       else Object.keys(expectedObject).forEach(function(key) {
         if(typeof object[key] == 'object') {
-          if(!objectAnalyzr.compare(object[key], expectedObject[key])) equal = false;
-        } else if(options.strict && expectedObject[key] !== object[key]) equal = false;
-        else if(expectedObject[key] != object[key]) equal = false;
+          if(!objectAnalyzr.compare(object[key], expectedObject[key])) return false;
+        } else if(options.strict && expectedObject[key] !== object[key]) return false;
+        else if(expectedObject[key] != object[key]) return false;
       });
     }
-    if(options.bidirectional && !objectAnalyzr.compare(expectedObject, object)) equal = false;
-    return equal;
+    if(options.bidirectional && !objectAnalyzr.compare(expectedObject, object)) return false;
+    return true;
   };
 
   objectAnalyzr.get = function(object, keys) {
