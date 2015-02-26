@@ -131,7 +131,7 @@ module.exports = exports = (function() {
 
   objectAnalyzr.getValues = function(object, keys) {
     var returnArray = [];
-    if(typeof keys == 'undefined') keys = Object.keys(keys);
+    if(typeof keys == 'undefined') keys = Object.keys(object);
     keys.forEach(function(key) {
       returnArray.push(object[key]);
     });
