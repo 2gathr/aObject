@@ -40,8 +40,8 @@ module.exports = exports = (function() {
     var defaultOptions = {
       depth: null
     };
-    if(typeof options == 'number') options = {depth: options};
-    if(!options) options = defaultOptions;
+    if(typeof options == 'undefined') options = defaultOptions;
+    else if(typeof options != 'object' || options === null) options = {depth: options};
     else objectAnalyzr.update(defaultOptions, options);
     if(!object) object = extendingObject;
     Object.keys(extendingObject).forEach(function(key) {
@@ -57,8 +57,9 @@ module.exports = exports = (function() {
     var defaultOptions = {
       bidirectional: false
     };
-    if(typeof options == 'boolean') options = {bidirectional: options};
-    objectAnalyzr.update(defaultOptions, options);
+    if(typeof options == 'undefined') options = defaultOptions;
+    else if(typeof options != 'object') options = {bidirectional: options};
+    else objectAnalyzr.update(defaultOptions, options);
     var equal = true;
     if(Array.isArray(expectedObject)) {
       expectedObject.forEach(function(key) {
@@ -82,8 +83,9 @@ module.exports = exports = (function() {
       bidirectional: false,
       strict: false
     };
-    if(typeof options == 'boolean') options = {bidirectional: options};
-    objectAnalyzr.update(defaultOptions, options);
+    if(typeof options == 'undefined') options = defaultOptions;
+    else if(typeof options != 'object') options = {bidirectional: options};
+    else objectAnalyzr.update(defaultOptions, options);
     var equal = true;
     if(Array.isArray(expectedObject)) {
       if(!Array.isArray(object) || expectedObject.length != object.length) return (equal = false);
