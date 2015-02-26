@@ -43,7 +43,7 @@ module.exports = exports = (function() {
     if(typeof options == 'undefined') options = defaultOptions;
     else if(typeof options != 'object' || options === null) options = {depth: options};
     else objectAnalyzr.update(defaultOptions, options);
-    if(!object) object = extendingObject;
+    if(typeof object != 'object') object = {}; // if object was set to extendingObject, modifying object would also modify extendingObject
     Object.keys(extendingObject).forEach(function(key) {
       if(typeof extendingObject[key] == 'object' && (options.depth === null || options.depth > 0)) {
         if(typeof object[key] == 'undefined') object[key] = {};
