@@ -66,6 +66,10 @@ module.exports = exports = (function() {
       objectAnalyzr.update(defaultOptions, options);
       options = defaultOptions;
     }
+    if(options.bidirectional) {
+      objectAnalyzr.update(options, {bidirectional: false});
+      if(!objectAnalyzr.compareKeys(expectedObject, object, options)) return false;
+    }
     if(Array.isArray(expectedObject)) {
       expectedObject.forEach(function(key) {
         if(typeof object[key] == 'undefined') return false;
@@ -74,12 +78,11 @@ module.exports = exports = (function() {
       Object.keys(expectedObject).forEach(function(key) {
         if(typeof expectedObject[key] == 'object') {
           if(typeof object[key] == 'object') {
-            if(!objectAnalyzr.compareKeys(expectedObject[key], object[key])) return false;
+            if(!objectAnalyzr.compareKeys(expectedObject[key], object[key], options)) return false;
           } else return false;
         } else if(typeof object[key] == 'undefined') return false;
       });
     }
-    if(options.bidirectional && !objectAnalyzr.compareKeys(expectedObject, object)) return false;
     return true;
   };
 
@@ -94,11 +97,15 @@ module.exports = exports = (function() {
       objectAnalyzr.update(defaultOptions, options);
       options = defaultOptions;
     }
+    if(options.bidirectional) {
+      objectAnalyzr.update(options, {bidirectional: false});
+      if (!objectAnalyzr.compare(expectedObject, object, options)) return false;
+    }
     if(Array.isArray(expectedObject)) {
       if(!Array.isArray(object) || expectedObject.length != object.length) return false;
       Object.keys(expectedObject).forEach(function(key) {
         if(typeof expectedObject[key] == 'object') {
-          if(!objectAnalyzr.compare(object[key], expectedObject[key])) return false;
+          if(!objectAnalyzr.compare(object[key], expectedObject[key], options)) return false;
         } else if(options.strict && expectedObject[key] !== object[key]) return false;
         else if (expectedObject[key] != object[key]) return false;
       });
@@ -106,12 +113,11 @@ module.exports = exports = (function() {
       if(typeof object != 'object') return false;
       else Object.keys(expectedObject).forEach(function(key) {
         if(typeof object[key] == 'object') {
-          if(!objectAnalyzr.compare(object[key], expectedObject[key])) return false;
+          if(!objectAnalyzr.compare(object[key], expectedObject[key], options)) return false;
         } else if(options.strict && expectedObject[key] !== object[key]) return false;
         else if(expectedObject[key] != object[key]) return false;
       });
     }
-    if(options.bidirectional && !objectAnalyzr.compare(expectedObject, object)) return false;
     return true;
   };
 
