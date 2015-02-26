@@ -5,6 +5,7 @@
   var objectAnalyzr = require('../objectAnalyzr');
 
   describe('objectAnalyzr', function() {
+
     describe('.compare()', function() {
 
       it('should return true if the expected object has some extra keys and both are nested', function() {
@@ -54,7 +55,7 @@
         ));
       });
 
-      it('should return false if the expected object has the same extra keys with different content', function() {
+      it('should return false if the expected object has the same keys with different content', function() {
         assert.equal(false, objectAnalyzr.compare(
           {
             one: 'foo',
@@ -93,5 +94,48 @@
       });
 
     });
+
+    describe('.compareKeys()', function() {
+
+      it('should return true if the expected object has the same keys with different content', function() {
+        assert.equal(false, objectAnalyzr.compare(
+          {
+            one: 'foo',
+            two: [
+              'bar',
+              'qux'
+            ]
+          },
+          {
+            one: 'foo',
+            two: [
+              'bar',
+              'corge'
+            ]
+          }
+        ));
+      });
+
+      it('should return false if a key of the expected object has a different name', function() {
+        assert.equal(false, objectAnalyzr.compare(
+          {
+            one: 'foo',
+            two: [
+              'bar',
+              'qux'
+            ]
+          },
+          {
+            one: 'foo',
+            three: [
+              'bar',
+              'qux'
+            ]
+          }
+        ));
+      });
+
+    });
+
   });
 })();
